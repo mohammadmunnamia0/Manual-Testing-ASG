@@ -1,0 +1,348 @@
+{
+  "info": {
+    "_postman_id": "evershop-search-api-collection",
+    "name": "Evershop Search API Testing",
+    "description": "Comprehensive API testing collection for Evershop search functionality",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "12345678",
+    "export_date": "2026-06-15"
+  },
+  "item": [
+    {
+      "name": "1. Valid Search Query - Thermos",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+          },
+          {
+            "key": "Accept-Encoding",
+            "value": "gzip, deflate"
+          }
+        ],
+        "url": {
+          "raw": "https://demo.evershop.io/search?keyword=thermos",
+          "protocol": "https",
+          "host": [
+            "demo",
+            "evershop",
+            "io"
+          ],
+          "path": [
+            "search"
+          ],
+          "query": [
+            {
+              "key": "keyword",
+              "value": "thermos"
+            }
+          ]
+        },
+        "description": "Search for existing product 'thermos'. Should return 2 products."
+      },
+      "response": []
+    },
+    {
+      "name": "2. Non-existent Product Search - Nike React",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+          }
+        ],
+        "url": {
+          "raw": "https://demo.evershop.io/search?keyword=Nike+react",
+          "protocol": "https",
+          "host": [
+            "demo",
+            "evershop",
+            "io"
+          ],
+          "path": [
+            "search"
+          ],
+          "query": [
+            {
+              "key": "keyword",
+              "value": "Nike react"
+            }
+          ]
+        },
+        "description": "Search for non-existent product. Should return 'No products found'."
+      },
+      "response": []
+    },
+    {
+      "name": "3. Case Insensitive Search - THERMOS (Uppercase)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+          }
+        ],
+        "url": {
+          "raw": "https://demo.evershop.io/search?keyword=THERMOS",
+          "protocol": "https",
+          "host": [
+            "demo",
+            "evershop",
+            "io"
+          ],
+          "path": [
+            "search"
+          ],
+          "query": [
+            {
+              "key": "keyword",
+              "value": "THERMOS"
+            }
+          ]
+        },
+        "description": "Test case insensitive search with uppercase query."
+      },
+      "response": []
+    },
+    {
+      "name": "4. Partial Search - Steel",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+          }
+        ],
+        "url": {
+          "raw": "https://demo.evershop.io/search?keyword=steel",
+          "protocol": "https",
+          "host": [
+            "demo",
+            "evershop",
+            "io"
+          ],
+          "path": [
+            "search"
+          ],
+          "query": [
+            {
+              "key": "keyword",
+              "value": "steel"
+            }
+          ]
+        },
+        "description": "Test partial/substring search matching."
+      },
+      "response": []
+    },
+    {
+      "name": "5. Empty Search Query",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+          }
+        ],
+        "url": {
+          "raw": "https://demo.evershop.io/search?keyword=",
+          "protocol": "https",
+          "host": [
+            "demo",
+            "evershop",
+            "io"
+          ],
+          "path": [
+            "search"
+          ],
+          "query": [
+            {
+              "key": "keyword",
+              "value": ""
+            }
+          ]
+        },
+        "description": "Test behavior with empty search query."
+      },
+      "response": []
+    },
+    {
+      "name": "6. Special Characters Search",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+          }
+        ],
+        "url": {
+          "raw": "https://demo.evershop.io/search?keyword=!@%23$%25",
+          "protocol": "https",
+          "host": [
+            "demo",
+            "evershop",
+            "io"
+          ],
+          "path": [
+            "search"
+          ],
+          "query": [
+            {
+              "key": "keyword",
+              "value": "!@#$%"
+            }
+          ]
+        },
+        "description": "Test search with special characters for security validation."
+      },
+      "response": []
+    },
+    {
+      "name": "7. SQL Injection Test",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+          }
+        ],
+        "url": {
+          "raw": "https://demo.evershop.io/search?keyword='%20OR%20'1'%3D'1",
+          "protocol": "https",
+          "host": [
+            "demo",
+            "evershop",
+            "io"
+          ],
+          "path": [
+            "search"
+          ],
+          "query": [
+            {
+              "key": "keyword",
+              "value": "' OR '1'='1"
+            }
+          ]
+        },
+        "description": "Security test: SQL injection attempt. Should be safely handled."
+      },
+      "response": []
+    },
+    {
+      "name": "8. XSS Payload Test",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+          }
+        ],
+        "url": {
+          "raw": "https://demo.evershop.io/search?keyword=%3Cscript%3Ealert('XSS')%3C/script%3E",
+          "protocol": "https",
+          "host": [
+            "demo",
+            "evershop",
+            "io"
+          ],
+          "path": [
+            "search"
+          ],
+          "query": [
+            {
+              "key": "keyword",
+              "value": "<script>alert('XSS')</script>"
+            }
+          ]
+        },
+        "description": "Security test: XSS payload. Should be safely rendered as text."
+      },
+      "response": []
+    },
+    {
+      "name": "9. Numeric Search - Price",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+          }
+        ],
+        "url": {
+          "raw": "https://demo.evershop.io/search?keyword=35",
+          "protocol": "https",
+          "host": [
+            "demo",
+            "evershop",
+            "io"
+          ],
+          "path": [
+            "search"
+          ],
+          "query": [
+            {
+              "key": "keyword",
+              "value": "35"
+            }
+          ]
+        },
+        "description": "Test numeric search (product price)."
+      },
+      "response": []
+    },
+    {
+      "name": "10. Long Search Query",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+          }
+        ],
+        "url": {
+          "raw": "https://demo.evershop.io/search?keyword=Lorem%20ipsum%20dolor%20sit%20amet%20consectetur%20adipiscing%20elit%20sed%20do%20eiusmod%20tempor%20incididunt%20ut%20labore%20et%20dolore%20magna%20aliqua%20enim%20ad%20minim%20veniam%20quis%20nostrud",
+          "protocol": "https",
+          "host": [
+            "demo",
+            "evershop",
+            "io"
+          ],
+          "path": [
+            "search"
+          ],
+          "query": [
+            {
+              "key": "keyword",
+              "value": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam quis nostrud"
+            }
+          ]
+        },
+        "description": "Test with long search query (200+ characters)."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://demo.evershop.io",
+      "type": "string"
+    },
+    {
+      "key": "search_endpoint",
+      "value": "/search",
+      "type": "string"
+    }
+  ]
+}
